@@ -12,7 +12,7 @@ import (
 )
 
 // Define PostgreSQL connection parameters
-const connStr = "user=postgres password=YumeKo#7424 dbname=nifty sslmode=disable"
+const connStr = "user=postgres password=postgres dbname=nifty sslmode=disable"
 
 type Item struct {
 	Date  time.Time
@@ -93,5 +93,5 @@ func main() {
 	// Gin connection
 	r := gin.Default()
 	r.POST("/getdata", handler)
-	r.Run(":8080")
+	r.Run(":3680")
 }
