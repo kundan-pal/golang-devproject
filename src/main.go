@@ -92,6 +92,6 @@ func handler(c *gin.Context) {
 func main() {
 	// Gin connection
 	r := gin.Default()
-	r.POST("/getdata", handler)
+	r.GET("/getdata", handler)
 	r.Run(":3680")
 }
