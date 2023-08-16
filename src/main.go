@@ -3,16 +3,17 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"net/http"
 	"time"
+
+	log "github.com/sirupsen/logrus"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
 
 // Define PostgreSQL connection parameters
-const connStr = "user=postgres password=postgres dbname=nifty sslmode=disable"
+const connStr = "user=postgres password=postgres dbname=nifty host=10.11.50.34 sslmode=disable"
 
 type Item struct {
 	Date  time.Time
@@ -31,7 +32,8 @@ func handler(c *gin.Context) {
 	// Open a connection to the database
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
-		log.Fatal(err)
+		log.Error("Error in connecting to postgres\n", err)
+		return
 	}
 	defer db.Close()
 
@@ -49,20 +51,24 @@ func handler(c *gin.Context) {
 
 	parsedStartDate, errStartDate := time.Parse(layout, inputData.StartDate)
 	if errStartDate != nil {
-		fmt.Println("Error:", errStartDate)
+		// fmt.Println("Error:", errStartDate)
+		log.Error("start date is in wrong format")
 		return
 	}
 
 	parsedEndDate, errEndDate := time.Parse(layout, inputData.EndDate)
 	if errEndDate != nil {
-		fmt.Println("Error:", errEndDate)
+		log.Error("end date is in wrong format")
+		// fmt.Println("Error:", errEndDate)
 		return
 	}
 
 	rows, err := db.Query("SELECT nifty_date, \""+inputData.StockName+"\" FROM summary where nifty_date >= $1 and nifty_date <= $2 ",
 		parsedStartDate, parsedEndDate)
 	if err != nil {
-		log.Fatal(err)
+		log.Error("Error in running sql query", err)
+		// log.Fatal(err)
+		return
 	}
 	defer rows.Close()
 
@@ -93,5 +99,5 @@ func main() {
 	// Gin connection
 	r := gin.Default()
 	r.GET("/getdata", handler)
-	r.Run(":3680")
+	r.Run(":8080")
 }
