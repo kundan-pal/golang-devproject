@@ -15,7 +15,8 @@ if st.button("Get Results"):
         "endDate": str(end_date),
     }
 
-    response = requests.get("http://localhost:8080/getdata", data)
+    # response = requests.get("http://localhost:8080/getdata", data)
+    response = requests.get("http://172.17.0.1:8080/getdata", data)
 
     if response.status_code == 200:
         print(response.text)
