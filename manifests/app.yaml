@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: python-frontend
-          image: your-python-frontend-image:latest
+          image: kundanpal/docker_training:app1
           ports:
             - containerPort: 8501
