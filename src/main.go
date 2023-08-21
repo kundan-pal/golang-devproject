@@ -13,7 +13,7 @@ import (
 )
 
 // Define PostgreSQL connection parameters
-const connStr = "user=postgres password=postgres dbname=nifty host=10.11.50.34 sslmode=disable"
+const connStr = "user=postgres password=postgres dbname=nifty sslmode=disable"
 
 type Item struct {
 	Date  time.Time
