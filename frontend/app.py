@@ -17,8 +17,7 @@ if st.button("Get Results"):
 
     # response = requests.get("http://localhost:8080/getdata", data)
     # response = requests.get("http://172.17.0.2:8080/getdata", data)
-    # response = requests.get("http://go-server-service:8080/getdata", data)
-    response = requests.get("http://127.0.0.1:56448/getdata", data)
+    response = requests.get("http://go-server-service.default.svc.cluster.local:8080/getdata", data)
 
     if response.status_code == 200:
         print(response.text)
