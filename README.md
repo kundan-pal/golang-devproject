@@ -4,7 +4,7 @@ Simple project that takes in a stock ticker and date ranges and returns highest 
 
 ## Docker setup
 ### Building Docker Images:
-Built Docker images for your Go server and Python frontend applications using docker build commands.
+Built Docker images for Go server and Python frontend applications using docker build commands.
 ```
 docker build -t go_server .
 docker run -p 8080:8080 go_server
@@ -12,10 +12,10 @@ docker ps
 ```
 
 ### Docker Compose:
-Used a Docker Compose file to define services for your Go server, Python frontend, and PostgreSQL database. You defined a network for them to communicate.
+Used a Docker Compose file to define services for Go server, Python frontend, and PostgreSQL database. Defined a network for them to communicate.
 
 ### Docker Network:
-Created a Docker network for your services to communicate within.
+Created a Docker network for services to communicate within.
 
 ## Kubernetes (Minikube) Setup
 ### Minikube Installation:
@@ -52,15 +52,15 @@ kubectl delete service service_name
 ### ImagePullBackoff and ErrImagePull:
 Faced issues with images not being pulled or running in pods.
 
-Solution: Ensure the images are accessible to your Kubernetes cluster. Use minikube image load to load local images.
+Solution: Ensure the images are accessible to Kubernetes cluster. Use minikube image load to load local images.
 ### Pending Status of Pods:
 Pods were in a "Pending" state.
 
 Solution: Check Minikube status, allocate more resources if needed, and check for any issues with resources or configuration.
 ### Connection Errors:
-You encountered connection errors between your components.
+You encountered connection errors between components.
 
-Solution: Ensure services are using correct names for communication. Update connection strings in your server code to use service names.
+Solution: Ensure services are using correct names for communication. Update connection strings in  server code to use service names.
 ### Further Steps
 Debugging Logs:
 Check pod logs using kubectl logs to diagnose issues within pods.
