@@ -67,3 +67,36 @@ Check pod logs using kubectl logs to diagnose issues within pods.
 
 ### Minikube Dashboard:
 Use minikube dashboard to access the Kubernetes dashboard for monitoring and debugging.
+
+
+## Commands
+
+Build command for creating docker image
+docker build -t kundanpal/docker_training:server_v1 -f .\docker_files\Dockerfile.server .
+docker build -t kundanpal/docker_training:app_v1 -f .\docker_files\Dockerfile.app .
+
+Command to push the image to the docker hub
+docker push kundanpal/docker_training:server_v1
+docker push kundanpal/docker_training:app_v1
+
+command to deploy kubernetes resoucres
+kubectl apply -f server.yaml
+kubectl apply -f server_service.yaml
+kubectl apply -f app.yaml
+kubectl apply -f app_service.yaml
+
+minikube start
+
+Run below command and let it be running in a terminal
+minikube dashboard
+
+
+
+To expose a Kubernetes service running within a Minikube cluster and open a web browser to view that service
+Leave this service running in a terminal
+minikube service go-server
+minikube service pytthon-frontend
+
+command to see the logs of the pods
+kubectl logs -f -l app=go-server --all-containers=true
+kubectl logs -f -l app=python-frontend --all-containers=true
